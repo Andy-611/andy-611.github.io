@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: AI Agents, Multi-Agent Systems, agent coordination, and agentic workflows.
+subtitle: Agents, Multi-Agent Systems
 
 profile:
   align: right
