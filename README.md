@@ -1,15 +1,16 @@
 # An Yan's Personal Homepage
 
-This is a static GitHub Pages personal homepage for An Yan.
+This repository hosts An Yan's personal homepage at <https://andy-611.github.io>.
 
-## Structure
+The site uses the [al-folio](https://github.com/alshedivat/al-folio) Jekyll theme.
 
-- `index.html`: homepage content.
-- `styles.css`: shared page and note styles.
-- `notes/`: technical blog pages.
-- `assets/`: static images and icons.
+## Content
 
-## Publish
+- `_pages/about.md`: homepage content, including About, Experience, Prizes, and contact information.
+- `_posts/`: technical blog posts.
+- `_data/socials.yml`: email, GitHub, and RSS links.
+- `_config.yml`: site identity, URL, blog settings, and theme configuration.
 
-The site is plain HTML/CSS and does not require a build step. GitHub Pages serves it from the repository root.
+## Deployment
 
+al-folio builds through GitHub Actions and publishes the generated site to the `gh-pages` branch.
