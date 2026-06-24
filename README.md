@@ -1,22 +1,15 @@
-# GitHub Pages Personal Site
+# An Yan's Personal Homepage
 
-This is a static GitHub Pages portfolio for AI systems / agent engineering roles.
+This is a static GitHub Pages personal homepage for An Yan.
 
-## Before publishing
+## Structure
 
-Replace these placeholders in `index.html`:
+- `index.html`: homepage content.
+- `styles.css`: shared page and note styles.
+- `notes/`: technical blog pages.
+- `assets/`: static images and icons.
 
-- `Your Name`
-- `YOUR_GITHUB`
-- `your.email@example.com`
-- LinkedIn / Google Scholar / Hugging Face URLs if available
-- `assets/profile-placeholder.svg` with a real portrait if you want one
+## Publish
 
-## Publish options
-
-Option A: create a repository named `<YOUR_GITHUB>.github.io`, copy all files in this folder to the repository root, then push to `main`.
-
-Option B: copy this folder into any GitHub repository and enable GitHub Pages from `Settings -> Pages -> Deploy from a branch`.
-
-The site is plain HTML/CSS and does not require a build step.
+The site is plain HTML/CSS and does not require a build step. GitHub Pages serves it from the repository root.
 
