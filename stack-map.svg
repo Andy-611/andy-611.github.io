@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">AI systems portfolio map</title>
+  <desc id="desc">A diagram connecting protocol design, tool use, agent environments, and research memory.</desc>
+  <rect width="960" height="360" fill="#f7f8f9"/>
+  <g fill="#ffffff" stroke="#d5dce2" stroke-width="2">
+    <rect x="70" y="82" width="185" height="104" rx="8"/>
+    <rect x="300" y="82" width="185" height="104" rx="8"/>
+    <rect x="530" y="82" width="185" height="104" rx="8"/>
+    <rect x="385" y="228" width="190" height="82" rx="8"/>
+  </g>
+  <g fill="#18212a" font-family="Inter, Arial, sans-serif">
+    <text x="96" y="123" font-size="24" font-weight="700">Protocol</text>
+    <text x="96" y="154" font-size="16">addresses, messages,</text>
+    <text x="96" y="176" font-size="16">audit boundaries</text>
+    <text x="326" y="123" font-size="24" font-weight="700">Tools</text>
+    <text x="326" y="154" font-size="16">MCP bridge, routing,</text>
+    <text x="326" y="176" font-size="16">execution contracts</text>
+    <text x="556" y="123" font-size="24" font-weight="700">Markets</text>
+    <text x="556" y="154" font-size="16">agent negotiation,</text>
+    <text x="556" y="176" font-size="16">risk and reputation</text>
+    <text x="421" y="262" font-size="24" font-weight="700">Memory</text>
+    <text x="421" y="290" font-size="16">durable research workflow</text>
+  </g>
+  <g stroke="#178c8c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M255 134h45"/>
+    <path d="M485 134h45"/>
+    <path d="M392 186l54 42"/>
+    <path d="M623 186l-77 42"/>
+  </g>
+  <g fill="#178c8c">
+    <path d="M300 134l-11-7v14z"/>
+    <path d="M530 134l-11-7v14z"/>
+    <path d="M446 228l-13-2 8-10z"/>
+    <path d="M546 228l7-12 8 10z"/>
+  </g>
+  <circle cx="811" cy="134" r="45" fill="#ffffff" stroke="#d5dce2" stroke-width="2"/>
+  <text x="781" y="128" fill="#18212a" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">AI</text>
+  <text x="772" y="151" fill="#18212a" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Stack</text>
+</svg>

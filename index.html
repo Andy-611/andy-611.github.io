@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal portfolio for AI systems, agent infrastructure, protocol design, and research engineering.">
+  <title>Your Name | AI Systems and Agent Infrastructure</title>
+  <link rel="icon" href="assets/profile-placeholder.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="profile">
+      <a class="site-mark" href="index.html">AI Systems Portfolio</a>
+      <img class="avatar" src="assets/profile-placeholder.svg" alt="Profile placeholder">
+      <h1>Your Name</h1>
+      <p class="role">AI Systems & Agent Infrastructure</p>
+      <p class="profile-line">I build agent systems where tool use, memory, multi-agent interaction, and human oversight are inspectable engineering objects.</p>
+      <nav class="profile-links" aria-label="Profile links">
+        <a href="https://github.com/YOUR_GITHUB">GitHub</a>
+        <a href="mailto:your.email@example.com">Email</a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
+        <a href="https://huggingface.co/YOUR_HF">Hugging Face</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="intro section">
+        <p class="eyebrow">Research direction</p>
+        <h2>Agent systems that are protocol-aware, tool-using, and auditable.</h2>
+        <p>
+          My current work sits between AI agents and software systems: protocol layers for agent communication,
+          MCP-style tool bridges, task environments for negotiation, and research workflows that preserve decisions
+          instead of leaving them inside chat history.
+        </p>
+        <img class="wide-figure" src="assets/stack-map.svg" alt="Map of protocol, tools, markets, and memory work">
+      </section>
+
+      <section class="section" id="about">
+        <h2>About</h2>
+        <p>
+          I am developing an AI work portfolio around agent infrastructure. The unifying question is:
+          how should autonomous systems call tools, negotiate with other agents, escalate to humans, and leave an
+          evidence trail that engineers can trust?
+        </p>
+        <p>
+          I care about clean abstractions, typed interfaces, compact implementation, and research notes that turn
+          implementation choices into reusable knowledge.
+        </p>
+      </section>
+
+      <section class="section" id="work">
+        <h2>Selected work</h2>
+
+        <div class="work-group">
+          <h3>Agent Protocols and Tool Use</h3>
+          <article class="work-item">
+            <div>
+              <h4><a href="notes/from-invoke-to-tool-call.html">From INVOKE to tools/call: a thin bridge between agent protocols and MCP</a></h4>
+              <p>
+                A systems note on separating protocol routing from concrete tool transports, using ALN / Foundation Protocol and MCP as the case study.
+              </p>
+            </div>
+            <span class="tag">Protocol</span>
+          </article>
+        </div>
+
+        <div class="work-group">
+          <h3>Multi-Agent Environments</h3>
+          <article class="work-item">
+            <div>
+              <h4><a href="notes/market-level-multi-agent-systems.html">Market-level multi-agent systems need negotiation protocols, not just smarter agents</a></h4>
+              <p>
+                A product-and-systems note based on an agentic second-hand electronics marketplace with risk inspection, price estimation, deal state, and human escalation.
+              </p>
+            </div>
+            <span class="tag">Agents</span>
+          </article>
+        </div>
+
+        <div class="work-group">
+          <h3>AI-Native Research Workflow</h3>
+          <article class="work-item">
+            <div>
+              <h4><a href="notes/ai-native-research-memory.html">AI-native research memory: turning collaboration logs into a durable engineering workflow</a></h4>
+              <p>
+                A note on using structured weekly reports, metadata, and decision logs to make AI-assisted engineering compound over time.
+              </p>
+            </div>
+            <span class="tag">Workflow</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <h2>Project stack</h2>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>ALN / MCP Bridge</h3>
+            <p>Agent protocol routing, tool entities, `INVOKE` payloads, MCP client adapters, and transport boundaries.</p>
+            <a href="notes/from-invoke-to-tool-call.html">Read note</a>
+          </article>
+          <article class="project-card">
+            <h3>Agentic Second-Hand Market</h3>
+            <p>End-to-end marketplace MVP with agent desk, deal room, network view, risk checks, pricing, contracts, and reputation.</p>
+            <a href="notes/market-level-multi-agent-systems.html">Read note</a>
+          </article>
+          <article class="project-card">
+            <h3>Research Memory Workflow</h3>
+            <p>Codex-to-Obsidian reporting workflow that turns collaboration history into structured project knowledge.</p>
+            <a href="notes/ai-native-research-memory.html">Read note</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="prizes">
+        <h2>Prizes</h2>
+        <h3>International & National Prizes</h3>
+        <ul class="prize-list">
+          <li><strong>2022</strong> National First Prize, 15th National Information Security Contest for College Students</li>
+          <li><strong>2023</strong> National Second Prize, 14th National University Student Mathematics Competition</li>
+          <li><strong>2023</strong> Honorable Mention, Mathematical Contest in Modeling (MCM)</li>
+          <li><strong>2022</strong> National-Level Prize, College Student Innovation and Entrepreneurship Training Program</li>
+          <li><strong>2019</strong> Third Prize, National High School Biology League</li>
+        </ul>
+        <h3>Regional & Provincial Prizes</h3>
+        <ul class="prize-list">
+          <li><strong>2022</strong> Second Prize, 33rd Beijing College Student Mathematics Competition, Non-Mathematics Group A</li>
+          <li><strong>2018</strong> Second Prize, 35th Chinese Physics Olympiad, Hubei Province</li>
+          <li><strong>2024</strong> Outstanding Graduate, Beijing Municipal Level</li>
+          <li><strong>2023</strong> Second Scholarship for Academic Excellence, School Level</li>
+          <li><strong>2022</strong> Three-Good Student, School Level</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        <p>&copy; 2026 Your Name. Built for GitHub Pages.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

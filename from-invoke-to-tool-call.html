@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A project note on designing a thin bridge between agent protocol INVOKE messages and MCP tool calls.">
+  <title>From INVOKE to tools/call | Your Name</title>
+  <link rel="icon" href="../assets/profile-placeholder.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="note-page">
+  <main class="note-shell">
+    <nav class="note-nav" aria-label="Note navigation">
+      <a href="../index.html">&larr; Home</a>
+      <span>Project Note · Agent Protocols</span>
+    </nav>
+
+    <header class="note-header">
+      <p class="eyebrow">Agent protocols and tool use</p>
+      <h1>From INVOKE to tools/call: a thin bridge between agent protocols and MCP</h1>
+      <p class="note-meta">Drafted for AI infrastructure roles · ALN / Foundation Protocol / MCP</p>
+    </header>
+
+    <article class="note-body">
+      <p>
+        Tool use is often described as a model capability: the model decides to call a function, the function returns
+        a result, and the conversation continues. That framing is useful for demos, but it hides the harder engineering
+        question: once agents become networked entities, what is the durable system boundary between an agent protocol
+        and the tools it can execute?
+      </p>
+
+      <p>
+        The ALN / Foundation Protocol MCP bridge gave me a concrete answer. The protocol layer should route an
+        addressable request. The application layer should translate that request into the tool runtime. The tool
+        transport should remain replaceable.
+      </p>
+
+      <div class="system-steps">
+        <div><strong>Caller</strong>Sends an addressable protocol message with an execution intent.</div>
+        <div><strong>FP host</strong>Routes the message to a registered tool entity.</div>
+        <div><strong>MCP bridge</strong>Maps method and params into a concrete MCP tool call.</div>
+        <div><strong>Tool server</strong>Executes through stdio or HTTP and returns structured output.</div>
+      </div>
+
+      <h2>The boundary that matters</h2>
+      <p>
+        In this design, <code>INVOKE</code> is not just a string in an enum. It is the protocol-level verb for "please
+        execute an action." The payload carries two essential pieces of information: <code>method</code>, which names
+        the tool behavior, and <code>params</code>, which carries the arguments. The bridge reads those fields and
+        forwards them to an MCP client as a <code>tools/call</code>.
+      </p>
+
+      <p>
+        The important part is what the bridge does not do. It does not own the full agent policy. It does not decide
+        whether the user goal is wise. It does not reinterpret the tool schema into a new private contract. Its job is
+        narrow: preserve the protocol intent and make it executable in the MCP world.
+      </p>
+
+      <div class="note-callout">
+        <strong>Insight:</strong> a good tool bridge is deliberately boring. If it becomes clever, debugging becomes a
+        fight between the agent policy, the protocol router, and the tool runtime. Keeping the bridge thin makes each
+        layer accountable.
+      </div>
+
+      <h2>Why transport belongs behind the adapter</h2>
+      <p>
+        MCP tools may run over stdio during local development or HTTP in a deployed service. That difference matters
+        operationally, but it should not leak into the protocol verb. The caller should not care whether the entity is
+        backed by a local command, a service URL, or a future transport. The entity metadata can describe the MCP
+        configuration; the adapter can choose the transport; the protocol message can stay stable.
+      </p>
+
+      <p>
+        This is the same reason database drivers, message queues, and payment providers are usually hidden behind
+        adapters. The application needs an execution contract. Deployment needs a transport. Mixing the two creates
+        avoidable coupling.
+      </p>
+
+      <h2>Design consequences</h2>
+      <p>
+        This small bridge changes how I think about agent infrastructure. Agent tool use should be inspectable as a
+        sequence of typed events, not as a side effect inside a chat transcript. That means a production-ready system
+        needs:
+      </p>
+
+      <ul>
+        <li>stable entity identities, so tool calls are routed to the intended executor;</li>
+        <li>explicit verbs such as <code>INVOKE</code>, so execution is distinguishable from normal conversation;</li>
+        <li>structured payloads, so validation, replay, and audit are possible;</li>
+        <li>transport adapters, so local tools and remote tools share the same protocol surface;</li>
+        <li>clear ownership, so failure, escalation, and permission checks have a place to live.</li>
+      </ul>
+
+      <h2>What I would build next</h2>
+      <p>
+        The next step is a stronger contract layer around tool invocation. I would add typed schemas for method names
+        and params, structured error classes for transport failure versus tool failure, and a trace format that records
+        the original protocol message, resolved entity, MCP request, MCP response, and final protocol reply.
+      </p>
+
+      <p>
+        That trace would make the bridge useful for research as well as engineering. It would let us compare tool
+        routing strategies, detect brittle tools, and evaluate whether a model fails because it chose the wrong tool,
+        filled the arguments incorrectly, or called a correct tool through a broken transport.
+      </p>
+
+      <h2>What this project demonstrates</h2>
+      <p>
+        The value of this project is not only that it connects ALN / Foundation Protocol to MCP. It demonstrates a
+        systems habit that matters in agent work: reduce a vague AI behavior into a small protocol contract, then make
+        the contract observable, testable, and replaceable.
+      </p>
+    </article>
+  </main>
+</body>
+</html>

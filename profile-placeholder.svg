@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Profile placeholder</title>
+  <desc id="desc">A clean monogram placeholder for a personal AI systems portfolio.</desc>
+  <rect width="320" height="320" rx="8" fill="#f5f7f8"/>
+  <path d="M64 218V102h42c35 0 59 23 59 58s-24 58-59 58H64Zm30-27h11c18 0 30-12 30-31s-12-31-30-31H94v62Zm89 27V102h30v116h-30Zm-11-134 38-34 38 34h-35l-3 2-3-2h-35Z" fill="#18212a"/>
+  <path d="M47 256h226" stroke="#178c8c" stroke-width="8" stroke-linecap="round"/>
+</svg>
