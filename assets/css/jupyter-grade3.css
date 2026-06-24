@@ -195,7 +195,8 @@ body > #header .header-bar {
 
 .btn:hover,
 .btn:active:hover,
-.btn.active:hover {
+.btn.active:hover,
+.open > .dropdown-toggle.btn:hover {
   color: #ef5c00;
   border: 2px solid #e0e0e0;
   background-color: #e0e0e0;
@@ -210,7 +211,9 @@ body > #header .header-bar {
 .btn:active:focus,
 .btn.active:focus,
 .btn:active.focus,
-.btn.active.focus {
+.btn.active.focus,
+.open > .dropdown-toggle.btn:focus,
+.open > .dropdown-toggle.btn.focus {
   color: #ef5c00;
   border: 2px solid #e0e0e0;
   background-color: #e0e0e0 !important;
