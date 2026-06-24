@@ -1,0 +1,114 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Market-level multi-agent systems need negotiation protocols, not just smarter agents | An Yan </title> <meta name="author" content="An Yan"> <meta name="description" content="A product-and-systems note on coordination in agentic marketplace environments."> <meta name="keywords" content="AI Agents, Multi-Agent Systems, agent coordination, agentic workflows, academic website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://andy-611.github.io/blog/2026/market-level-multi-agent-systems/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> An Yan </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Market-level multi-agent systems need negotiation protocols, not just smarter agents</h1> <p class="post-meta"> Created on June 24, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/ai-agents"> <i class="fa-solid fa-hashtag fa-sm"></i> ai-agents</a>   <a href="/blog/tag/multi-agent-systems"> <i class="fa-solid fa-hashtag fa-sm"></i> multi-agent-systems</a>   ·   <a href="/blog/category/technical-blog"> <i class="fa-solid fa-tag fa-sm"></i> technical-blog</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Many “multi-agent” demos are really single-user systems with several internal worker agents. That pattern can help decompose tasks, but it does not solve the harder problem I care about: what happens when independent agents act on behalf of different people in the same market?</p> <p>I explored that question through an agentic second-hand electronics marketplace. The MVP had four user-facing surfaces: Marketplace, Agent Desk, Deal Room, and Agent Network. The backend used Python, SQLite, and a small protocol package; the frontend stayed intentionally lightweight with vanilla HTML, CSS, and JavaScript. The goal was not to maximize framework complexity. The goal was to make the agent interaction model visible.</p> <h2 id="the-product-question">The product question</h2> <p>A buyer’s agent should be able to search listings, estimate price, inspect risk, ask a seller for evidence, make an offer, counter, withdraw, accept a deal, or escalate to a human. Those actions sound ordinary, but they imply a serious systems design problem: each action changes the state of a relationship between parties.</p> <p>If the marketplace only gives the model an open-ended prompt, the system has no reliable way to audit what happened. If the marketplace defines a constrained action space, each agent move becomes a typed event with state, permissions, and consequences.</p> <p><strong>Insight:</strong> in market-level agent systems, the main abstraction is not “an agent that thinks.” The main abstraction is a public action that other agents, humans, and the platform can inspect.</p> <h2 id="the-action-space-as-a-safety-surface">The action space as a safety surface</h2> <p>I treated the action space as part of the safety design. A model can still reason freely, but the system should only execute actions that the marketplace understands. For this project, the stable actions included <code class="language-plaintext highlighter-rouge">search_marketplace</code>, <code class="language-plaintext highlighter-rouge">estimate_price</code>, <code class="language-plaintext highlighter-rouge">inspect_risk</code>, <code class="language-plaintext highlighter-rouge">ask_seller</code>, <code class="language-plaintext highlighter-rouge">request_evidence</code>, <code class="language-plaintext highlighter-rouge">make_offer</code>, <code class="language-plaintext highlighter-rouge">counter_offer</code>, <code class="language-plaintext highlighter-rouge">withdraw</code>, <code class="language-plaintext highlighter-rouge">escalate_to_human</code>, and <code class="language-plaintext highlighter-rouge">accept_deal</code>.</p> <p>That list is small enough to test, log, and explain. It also creates space for non-LLM logic. For example, price estimation should not be a vague web-search answer. It should be a platform-internal comparison over similar listings, with robust statistics so one suspiciously low price does not distort the buyer’s estimate.</p> <h2 id="protocol-objects-beat-hidden-chat-state">Protocol objects beat hidden chat state</h2> <p>The protocol package made the system more interesting than a basic marketplace UI. Addressing defines who can talk to whom. Message objects define what is being sent. Mail envelopes and carbon copies make auditability explicit. Approvals create a place for human escalation. Contracts encode deal state transitions. Reputation turns past outcomes into future trust signals.</p> <p>Those objects are not ornamental. They are how the market stays legible when agents become active participants. Without them, the system relies on chat history and implicit conventions. With them, the market can reject invalid transitions, show a human why an action was taken, and preserve accountability across agents.</p> <h2 id="what-i-learned">What I learned</h2> <p>The biggest design correction was conceptual. A market-level multi-agent system is not just an agent with more tools. It is an environment with rules, public events, incentives, and institutional memory. The model can be powerful, but the platform must still define what a valid action means.</p> <p>This is why I now evaluate agent systems by asking: what is the smallest set of actions that can express the workflow, and what invariant does each action protect? That question forces the design away from AI spectacle and toward durable product infrastructure.</p> <h2 id="what-i-would-build-next">What I would build next</h2> <p>I would extend the MVP with adversarial seller simulations, richer evidence requests, probabilistic risk scoring, and property-based tests over contract transitions. I would also add replayable traces so researchers can compare policies: when does an agent negotiate well, when does it over-trust evidence, and when should it stop and ask the user?</p> <p>The long-term version is a benchmarkable agent economy: small enough to inspect, realistic enough to reveal failures, and structured enough that new agent policies can be compared without rewriting the environment.</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/ai-native-research-memory/">AI-native research memory: turning collaboration logs into a durable engineering workflow</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/from-invoke-to-tool-call/">From INVOKE to tools/call: a thin bridge between agent protocols and MCP</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 An Yan. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-ai-native-research-memory-turning-collaboration-logs-into-a-durable-engineering-workflow",
+        
+          title: "AI-native research memory: turning collaboration logs into a durable engineering workflow",
+        
+        description: "A note on structured reports, metadata, and reusable engineering knowledge.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/ai-native-research-memory/";
+          
+        },
+      },{id: "post-market-level-multi-agent-systems-need-negotiation-protocols-not-just-smarter-agents",
+        
+          title: "Market-level multi-agent systems need negotiation protocols, not just smarter agents",
+        
+        description: "A product-and-systems note on coordination in agentic marketplace environments.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/market-level-multi-agent-systems/";
+          
+        },
+      },{id: "post-from-invoke-to-tools-call-a-thin-bridge-between-agent-protocols-and-mcp",
+        
+          title: "From INVOKE to tools/call: a thin bridge between agent protocols and MCP",
+        
+        description: "A systems note on separating protocol routing from concrete tool transports.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/from-invoke-to-tool-call/";
+          
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%79%61%79%61%79%61%39%32%31@%71%71.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Andy-611", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
