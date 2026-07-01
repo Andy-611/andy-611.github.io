@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Marketplace price estimators need robust statistics"
-date: 2026-07-01 10:00:00
+date: 2026-07-01 10:00:00 +0800
 description: A concrete pricing lesson from building a platform-internal estimator for an agentic second-hand market.
 tags: [marketplace-systems, pricing]
 categories: [technical-blog]
